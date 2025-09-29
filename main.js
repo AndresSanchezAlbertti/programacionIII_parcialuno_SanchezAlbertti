@@ -23,7 +23,7 @@ function imprimirDatosAlumno() {
         apellido: "Sánchez Albertti"
     };
 
-    console.log(`DNI:35267290- Nombre: ${alumno.nombre} - Apellido: ${alumno.apellido}`);
+    console.log(`DNI:${alumno.dni}- Nombre: ${alumno.nombre} - Apellido: ${alumno.apellido}`);
     console.log(`${alumno.nombre} ${alumno.apellido}`);
 
     const nav = document.getElementById("datosAlumno");
