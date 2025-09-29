@@ -16,7 +16,7 @@ let html = "";
 
 
 function imprimirDatosAlumno() {
-    /*Imprime los datos en el >nav> del HTML*/
+    /*Imprime los datos en el >nav> del HTML agregando codigo html con el metyodo innerHTML*/
     const alumno = {
         dni:"35267290",
         nombre: "Andrés",
