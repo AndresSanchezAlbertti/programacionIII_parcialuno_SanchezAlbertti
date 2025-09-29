@@ -44,6 +44,7 @@ function imprimirProductos(lista) {
         <img id="imagen" src="${producto.ruta_img}" alt="${producto.nombre}">
         <h3>${producto.nombre}</h3>
         <p>$${producto.precio}</p>
+        
         <button onclick="agregarAlCarrito(${producto.id}); mostrarCarrito()">Agregar al carrito</button>
       </div>
     `;
@@ -51,14 +52,25 @@ function imprimirProductos(lista) {
 
   listado.innerHTML = html;
 }
-function mostrarCarrito() {
+
     /* Muestra los productos en el carrito 
     usa localStorage para obtener los productos guardados en el carrito y los imprime en el HTML
     uso un foreach guardando el indice para luego poder eliminar el producto del carrito
     */
+ function mostrarCarrito() {
   let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
   const contenedorCarrito = document.getElementById("listaCarrito");
+  const contadorHeader = document.getElementById("contadorCarritoHeader");
+  const totalCarrito = document.getElementById("totalCarrito");
   let html = "";
+
+  
+  if (carrito.length === 0) {
+    contenedorCarrito.innerHTML = "<p>El carrito está vacío</p>";
+    contadorHeader.textContent = "Carrito: 0 productos";
+    totalCarrito.textContent = "";
+    return;
+  }
   carrito.forEach((producto, index) => {
     html += `
       <li class="bloque-item">
@@ -69,6 +81,16 @@ function mostrarCarrito() {
   });
 
   contenedorCarrito.innerHTML = html;
+  contadorHeader.textContent = `Carrito: ${carrito.length} producto(s)`;
+  let total = carrito.reduce((acum, prod) => acum + prod.precio, 0);
+  totalCarrito.textContent = `Total: $${total}`;
+}
+function eliminarProductoPorCantidad(indice){
+    let cantidad = document.getElementById("cantidad").value;
+    if(cantidad <= 0){
+        eliminarProducto(indice);
+
+    }
 }
 function eliminarProducto(indice) {
     /* Elimina un producto del carrito
